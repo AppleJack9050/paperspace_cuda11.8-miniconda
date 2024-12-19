@@ -154,69 +154,15 @@
 
     RUN $PIP_INSTALL tensorflow
 
-
-# ==================================================================
-# Hugging Face
-# ------------------------------------------------------------------
-    
-    # Based on https://huggingface.co/docs/transformers/installation
-    # Based on https://huggingface.co/docs/datasets/installation
-
-    RUN $PIP_INSTALL transformers \
-        datasets \
-        peft \
-        tokenizers \
-        accelerate \
-        diffusers \
-        safetensors
-
 # ==================================================================
 # JupyterLab
 # ------------------------------------------------------------------
 
     # Based on https://jupyterlab.readthedocs.io/en/stable/getting_started/installation.html#pip
 
-    RUN pip install jupyter -U && pip install jupyterlab
+    RUN $PIP_INSTALL jupyter -U && pip install jupyterlab
 
-# ==================================================================
-# Additional Python Packages
-# ------------------------------------------------------------------
-
-    RUN $PIP_INSTALL \
-        bitsandbytes \
-        cloudpickle \
-        scikit-image \
-        scikit-learn \
-        matplotlib \
-        ipywidgets \
-        cython \
-        tqdm \
-        gdown \
-        xgboost \
-        pillow \
-        seaborn \
-        sqlalchemy \
-        spacy \
-        nltk \
-        boto3 \
-        tabulate \
-        future \
-        jsonify \
-        opencv-python \
-        openpyxl \
-        pyyaml \
-        sentence-transformers \
-        wandb \
-        deepspeed \
-        cupy-cuda11x \
-        timm \
-        omegaconf \
-        scipy \
-        gradient
-    RUN $PIP_INSTALL attrs
-
-
-# ==================================================================
+    # ==================================================================
 # Installing JRE and JDK
 # ------------------------------------------------------------------
 
@@ -233,17 +179,6 @@
         cd ~/cmake && \
         ./bootstrap && \
         make -j"$(nproc)" install
-
-
-# ==================================================================
-# Node.js and Jupyter Notebook Extensions
-# ------------------------------------------------------------------
-
-    RUN curl -sL https://deb.nodesource.com/setup_20.x | bash  && \
-        $APT_INSTALL nodejs  && \
-        $PIP_INSTALL jupyter_contrib_nbextensions jupyterlab-git && \
-        jupyter contrib nbextension install --user
-                
 
 # ==================================================================
 # Startup
