@@ -114,7 +114,8 @@
         dpkg -i cudnn-local-repo-ubuntu2204-9.6.0_1.0-1_amd64.deb && \
         cp /var/cudnn-local-repo-ubuntu2204-9.6.0/cudnn-*-keyring.gpg /usr/share/keyrings/ && \
         apt-get update && \
-        $APT_INSTALL cudnn-cuda-11
+        $APT_INSTALL cudnn-cuda-11 && \
+        rm cudnn-local-repo-ubuntu2204-9.6.0_1.0-1_amd64.deb
 
     ENV PATH=$PATH:/usr/local/cuda/bin
     ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
